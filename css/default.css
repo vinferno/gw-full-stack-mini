@@ -1,0 +1,115 @@
+:root {
+    --my-red: red;
+    --my-second-red: #ce0606;
+    --my-dark-red: darkred;
+    --my-blue: #387989;
+    --my-white: antiquewhite;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 30pt;
+}
+main {
+    margin: 0 auto;
+}
+
+section {
+
+
+    height: 100vh;
+    background-size: cover;
+}
+section.banner {
+    background-image: url("https://source.unsplash.com/featured/?coworkers,family");
+}
+section.login {
+    background-image: url("https://source.unsplash.com/featured/?security");
+}
+section.sign-up {
+    background-image: url("https://source.unsplash.com/featured/?autograph,write,pen, pencil");
+}
+
+section > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 100px;
+    background:  radial-gradient(circle farthest-side, var(--my-blue), rgba(56, 121, 137, 0.8), rgba(56, 121, 137, 0.6), rgba(100, 200, 200, 0.4), transparent);
+    text-align: center;
+}
+
+
+nav > ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+nav a, button {
+    background-color: var(--my-red);
+    box-shadow: 0 5px 0 var(--my-dark-red);
+    color: var(--my-white);
+    padding: 1em 1.5em;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+nav a:hover, button:hover {
+    background-color: var(--my-second-red);
+    cursor: pointer;
+}
+
+nav a:active {
+    box-shadow: none;
+    top: 5px;
+}
+
+form {
+    width: 400px;
+    background:  radial-gradient(circle farthest-side, var(--my-second-red), var(--my-dark-red));
+    padding: 1em;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+form label{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    color: var(--my-white)
+}
+
+footer {
+    background-image: url("https://source.unsplash.com/featured/?syntax");
+    padding: -1px;
+    background-size: cover;
+}
+
+footer > div {
+    color: var(--my-white);
+    height: 100%;
+    padding: 1px 100px;
+    background:  radial-gradient(ellipse farthest-corner at 45px 45px, rgba(56, 121, 137, 0.8) 0%, rgba(144, 0, 0, 0.8) );;
+}
+
+.red {
+    color: var(--my-dark-red)
+}
+
+input, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    margin-bottom: .4em;
+}
+
+
+h1, h2, p {
+    text-shadow: 0px 1px darkgrey;
+    font-weight: bold;
+    padding-left: 10vw;
+    padding-right: 10vw;
+}

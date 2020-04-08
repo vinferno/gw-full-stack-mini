@@ -29,7 +29,9 @@ section.login {
 section.sign-up {
     background-image: url("https://source.unsplash.com/featured/?autograph,write,pen, pencil");
 }
-
+section.profile {
+    background-image: url("https://source.unsplash.com/featured/?stars,clouds");
+}
 section > div {
     display: flex;
     flex-direction: column;
@@ -40,11 +42,14 @@ section > div {
     text-align: center;
 }
 
+ul {
+    list-style: none;
+}
 
 nav > ul {
     display: flex;
     justify-content: center;
-    list-style: none;
+
 }
 
 nav a, button {
@@ -112,4 +117,57 @@ h1, h2, p {
     font-weight: bold;
     padding-left: 10vw;
     padding-right: 10vw;
+}
+.profile-background {
+    width: 50%;
+    background-color: var(--my-white);
+    padding: 10px;
+    border-bottom-left-radius: 10%;
+    border-top-left-radius: 10%;
+}
+.profile-background-right {
+    width: 50%;
+    background-color: var(--my-white);
+    border-bottom-right-radius: 50%;
+    border-top-right-radius: 50%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.flex-horizontal {
+    display: flex;
+    flex-direction: row;
+}
+.flex-vertical {
+    display: flex;
+    flex-direction: column;
+}
+.text-align-left {
+    text-align: left;
+}
+
+
+.profile-image {
+    width: 35vw;
+    border-radius: 45%;
+    height: 35vw;
+}
+
+.profile-background a{
+    display: inline-block;
+    margin: 10px;
+}
+
+.profile > div  {
+    display: block;
+}
+
+.block {
+    display: block;
+}
+
+.profile-actions  {
+    display: inline-block;
+    margin: 0 auto;
 }

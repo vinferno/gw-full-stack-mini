@@ -4,7 +4,24 @@
     --my-dark-red: darkred;
     --my-blue: #387989;
     --my-white: antiquewhite;
+    --my-grey: linear-gradient(90deg, rgba(164,151,142,1) 0%, rgba(82,91,86,1) 49%, rgba(164,151,142,1) 100%);
+    --my-profile-background: var(--my-grey);
 }
+
+.red {
+    color: var(--my-dark-red)
+}
+.white {
+    color: var(--my-white)
+}
+.block {
+    display: block;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -15,8 +32,6 @@ main {
 }
 
 section {
-
-
     height: 100vh;
     background-size: cover;
 }
@@ -30,28 +45,25 @@ section.sign-up {
     background-image: url("https://source.unsplash.com/featured/?autograph,write,pen, pencil");
 }
 section.profile {
-    background-image: url("https://source.unsplash.com/featured/?stars,clouds");
+    background-image: url("https://source.unsplash.com/featured/?motherboard,computerchip");
 }
 section > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 100%;
-    padding: 100px;
-    background:  radial-gradient(circle farthest-side, var(--my-blue), rgba(56, 121, 137, 0.8), rgba(56, 121, 137, 0.6), rgba(100, 200, 200, 0.4), transparent);
+    padding: 0 100px;
+    background:  radial-gradient(circle farthest-side, var(--my-blue), rgba(56, 121, 137, 0.9), rgba(56, 121, 137, 0.6), rgba(100, 200, 200, 0.4), transparent);
     text-align: center;
 }
-
 ul {
     list-style: none;
 }
-
 nav > ul {
     display: flex;
     justify-content: center;
 
 }
-
 nav a, button {
     background-color: var(--my-red);
     box-shadow: 0 5px 0 var(--my-dark-red);
@@ -63,17 +75,14 @@ nav a, button {
     margin: 10px;
     border-radius: 10px;
 }
-
 nav a:hover, button:hover {
     background-color: var(--my-second-red);
     cursor: pointer;
 }
-
 nav a:active {
     box-shadow: none;
     top: 5px;
 }
-
 form {
     width: 400px;
     background:  radial-gradient(circle farthest-side, var(--my-second-red), var(--my-dark-red));
@@ -87,31 +96,22 @@ form label{
     flex-direction: column;
     color: var(--my-white)
 }
-
 footer {
     background-image: url("https://source.unsplash.com/featured/?syntax");
     padding: -1px;
     background-size: cover;
 }
-
 footer > div {
     color: var(--my-white);
     height: 100%;
     padding: 1px 100px;
     background:  radial-gradient(ellipse farthest-corner at 45px 45px, rgba(56, 121, 137, 0.8) 0%, rgba(144, 0, 0, 0.8) );;
 }
-
-.red {
-    color: var(--my-dark-red)
-}
-
 input, select, textarea {
     font-family: inherit;
     font-size: 100%;
     margin-bottom: .4em;
 }
-
-
 h1, h2, p {
     text-shadow: 0px 1px darkgrey;
     font-weight: bold;
@@ -120,21 +120,20 @@ h1, h2, p {
 }
 .profile-background {
     width: 50%;
-    background-color: var(--my-white);
+    background-image: linear-gradient(to left, rgba(164,151,142,.7) 0%, rgba(82,91,86,.8) 90%, rgba(40,45,43,.7) 95%);
     padding: 10px;
     border-bottom-left-radius: 10%;
     border-top-left-radius: 10%;
 }
 .profile-background-right {
     width: 50%;
-    background-color: var(--my-white);
+    background-image: linear-gradient(to right, rgba(164,151,142,.7) 0%, rgba(82,91,86,.8) 90%, rgba(40,45,43,.7) 95%);
     border-bottom-right-radius: 50%;
     border-top-right-radius: 50%;
-    padding: 10px;
+    padding: 15px;
     display: flex;
     align-items: center;
 }
-
 .flex-horizontal {
     display: flex;
     flex-direction: row;
@@ -146,28 +145,23 @@ h1, h2, p {
 .text-align-left {
     text-align: left;
 }
-
-
 .profile-image {
-    width: 35vw;
-    border-radius: 45%;
-    height: 35vw;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 50%;
 }
-
 .profile-background a{
     display: inline-block;
     margin: 10px;
 }
-
 .profile > div  {
     display: block;
 }
-
-.block {
-    display: block;
-}
-
 .profile-actions  {
     display: inline-block;
     margin: 0 auto;
 }
+

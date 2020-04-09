@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Geekwise Social Club: Profile</title>
+    <title>Geekwise Social Club: Edit Profile</title>
     <link rel="stylesheet" href="../css/default.css">
-    <script src="../js/profile.js"></script>
 </head>
 <body>
 <section id="profile" class="profile">
@@ -15,29 +14,47 @@
 
                 <div>
                     <ul class="text-align-left">
-                        <li>Name: <span class="red name">FIRST LAST NAME</span></li>
-                        <li>Email: <span class="red "> <i><a class="email" href="mailto:vinsonfernandez@gmail.com">
-            email@gmail.com</a>.</i></span></li>
+                        <li>Name: <input type="text">
+                        <li>Email: <input type="text"></li>
                     </ul>
                 </div>
+                <ul>
+                    <li>
+                        About Me:
+                        <textarea name="" id="" style="width: 90%"></textarea>
+                    </li>
+                </ul>
 
-                <p class="info">
-                    This is some info about <span class="red">me</span>.
-                </p>
-                <a href="/edit-profile">Edit</a>
+
+
             </div>
             <div class="profile-background-right">
                 <img class="profile-image" src="https://source.unsplash.com/featured/500x500/?selfie" alt="">
             </div>
         </div>
+
         <div class="profile-actions">
             <nav>
                 <ul class="flex-vertical">
-                    <li><a href="#" class="block">Friends</a></li>
-                    <li><a href="#" class="block">Chat</a></li>
+
+                    <li>
+                        <form action="">
+                            <label>
+                                <span>Username/Email</span>
+                                <input  type="text" placeholder="username/email">
+                            </label>
+
+                            <label>
+                                <span>Password</span>
+                                <input id="password" type="password" placeholder="password">
+                            </label>
+                            <button>UPDATE</button>
+                        </form>
+                    </li>
                 </ul>
             </nav>
         </div>
+
 
     </div>
 

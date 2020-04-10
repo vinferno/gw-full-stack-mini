@@ -2,6 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     console.log('run');
+    const elementEditLink = document.querySelector('#edit');
     const elementUsername = document.querySelector('h1');
     const elementName = document.querySelector('.name');
     const elementEmail = document.querySelector('.email');
@@ -13,6 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const urlParams = new URLSearchParams(window.location.search);
     const validId = urlParams.get('validId');
+    elementEditLink.addEventListener(  'click', function (e) {
+        e.preventDefault();
+        window.location.href = window.location.origin + '/edit-profile?validId=' +  validId;
+    })
     fetch('api-get-profile', {
         method: 'POST',
         headers: {

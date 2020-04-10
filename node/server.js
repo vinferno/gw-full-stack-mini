@@ -21,6 +21,11 @@ const User = require('./modules/user.schema');
 app.use('/js', express.static(path.join(__dirname + '/../js')));
 app.use('/css', express.static(path.join(__dirname + '/../css')));
 
+app.use( (req, res, next) => {
+    console.log(req.method, req.originalUrl);
+    next();
+})
+
 app.get('/', (req, res) => res.sendFile(path.join(__dirname + '/../html/login-page.html')));
 app.get('/profile', (req, res) => res.sendFile(path.join(__dirname + '/../html/profile.html')));
 app.get('/edit-profile', (req, res) => res.sendFile(path.join(__dirname + '/../html/edit-profile.html')));

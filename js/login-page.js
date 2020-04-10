@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => {
                 console.log('response', response);
                 if (response.success) {
-                    window.location.href = window.location.origin + '/profile?username=' + response.user.username;
+                    window.location.href = window.location.origin + '/profile?validId=' + response.user.username;
                 } else if(response.message) {
                     alert(response.message);
                 }

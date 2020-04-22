@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if(validId) {
         getFriends(validId);
+        document.querySelector('.title h1').innerHTML = `<span class="high-light"> ${validId}</span>'s Friends List`;
     } else {
         getUsers();
     }
@@ -45,7 +46,7 @@ function getFriends(validId) {
     }).then( res => res.json()).then( res => {
         console.log(res);
         const usersUl = document.querySelector('#users-ul');
-        usersUl.innerHTML = '';
+        usersUl.innerHTML = res.users.length ? '' : 'No Friends? Make Friends!';
         res.users.forEach( user => {
             const li = document.createElement('li');
             li.innerHTML = `    <li class="user-card">

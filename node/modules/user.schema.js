@@ -20,12 +20,4 @@ UserSchema.methods.generateHash = function(password) {
 UserSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.encryptedPassword);
 }
-
-UserSchema.methods.getSecure = function(list) {
-    const clone = {};
-    list.forEach(key => {
-        clone[key] = this[key];
-    });
-    return clone;
-}
 module.exports = mongoose.model('User', UserSchema);

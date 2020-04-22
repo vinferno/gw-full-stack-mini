@@ -16,6 +16,7 @@ app.use(express.json());
 
 
 const User = require('./modules/user.schema');
+const Chat = require('./modules/chat.schema');
 
 
 app.use('/js', express.static(path.join(__dirname + '/../js')));
@@ -30,6 +31,7 @@ app.get('/', (req, res) => res.sendFile(path.join(__dirname + '/../html/login-pa
 app.get('/profile', (req, res) => res.sendFile(path.join(__dirname + '/../html/profile.html')));
 app.get('/edit-profile', (req, res) => res.sendFile(path.join(__dirname + '/../html/edit-profile.html')));
 app.get('/users', (req, res) => res.sendFile(path.join(__dirname + '/../html/users-page.html')));
+app.get('/chat', (req, res) => res.sendFile(path.join(__dirname + '/../html/chat-page.html')));
 app.post('/api-sign-up', (req, res) => {
 
     const userInfo = {
@@ -138,7 +140,7 @@ app.post('/api-get-profile', (req, res) => {
     console.log('validId', req.body)
     User.find({
         'validIds': {$in: [req.body.validId]}
-    }, ['email', 'name', 'about', 'username', '-_id']).then(users => {
+    }).then(users => {
         if (!users || !users.length) {
             return res.json({
                 message: "User not found.",
@@ -258,4 +260,107 @@ app.post('/api-get-friends', (req, res) => {
             users: users[0].friends,
         });
     });
+});
+
+app.post('/api-get-isFriend', (req, res) => {
+    User.find({
+        'validIds': {$in: [req.body.myValidId]},
+        'friends': {$in: [ mongoose.Types.ObjectId(req.body.validId)]},
+    }).then(users => {
+        if (!users || !users.length) {
+            return res.json({
+                message: "User not found.",
+                success: false,
+            });
+        }
+        return res.json({
+            message: "Friends found",
+            success: true,
+            isFriends: !!(users.length)
+        });
+    });
+});
+
+app.post('/api-get-conversation', (req, res) => {
+    console.log(req.body);
+    const findMine = User.find({
+        'validIds': {$in: [req.body.myValidId]}
+    });
+    const findYours = User.find({
+        'validIds': {$in: [req.body.validId]}
+    });
+    Promise.all([
+        findMine,
+        findYours,
+    ]).then( results => {
+        const mine = results[0][0];
+        const yours = results[1][0];
+        Chat.find({
+            'participants': {$all: [mine._id, yours._id]}
+        }).populate('sender').then(chats => {
+            if (!chats) {
+                return res.json({
+                    message: "Chats not found.",
+                    success: false,
+                });
+            }
+            return res.json({
+                message: "Chats found",
+                success: true,
+                chats,
+            });
+        });
+    })
+
+});
+
+app.post('/api-add-chat', (req, res) => {
+
+    const findMine = User.find({
+        'validIds': {$in: [req.body.myValidId]}
+    });
+    const findYours = User.find({
+        'validIds': {$in: [req.body.validId]}
+    });
+    Promise.all([
+        findMine,
+        findYours,
+    ]
+    ).then( result => {
+        console.log('result.all', result);
+        const mine = result[0][0];
+        const yours = result[1][0];
+        if (mine && yours) {
+            const chat = new Chat({
+                message: req.body.message,
+                sender: mine._id,
+                participants: [mine._id, yours._id],
+            });
+            chat.save(function (error) {
+                if (error) {
+                    return res.json({
+                        message: "chat not saved",
+                        success: false,
+                        mine,
+                        yours,
+                    });
+                } else {
+                    return res.json({
+                        message: "chat saved",
+                        success: true,
+                        mine,
+                        yours,
+                    });
+                }
+
+            });
+        }else {
+            return result.json({
+                message: "users not found",
+                success: false,
+                mine,
+                yours,
+            });
+        }
+    })
 });

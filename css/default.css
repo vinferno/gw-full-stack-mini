@@ -47,6 +47,9 @@ section.sign-up {
 section.profile {
     background-image: url("https://source.unsplash.com/featured/?motherboard,computerchip");
 }
+section.users-section {
+    background-image: url("https://source.unsplash.com/featured/?lobby");
+}
 section > div {
     display: flex;
     flex-direction: column;
@@ -165,3 +168,31 @@ h1, h2, p {
     margin: 0 auto;
 }
 
+.users-section li {
+    font-size: larger;
+    border-radius: 10px;
+    margin: 20px;
+    background-image: linear-gradient(to right, rgba(164,151,142,.7) 0%, rgba(82,91,86,.8) 90%, rgba(40,45,43,.7) 95%);
+}
+
+.users-section ul {
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+}
+
+
+.users-section .user-card {
+    display: flex;
+    justify-content: space-between;
+}
+.users-section .username {
+    text-align: left;
+}
+
+.users-section .status {
+    text-align: right;
+}
+.users-section .title {
+    background:  radial-gradient(circle farthest-side, var(--my-blue), rgba(56, 121, 137, 0.9), rgba(56, 121, 137, 0.6), rgba(100, 200, 200, 0.4), transparent);
+}

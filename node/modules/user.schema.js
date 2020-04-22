@@ -5,9 +5,12 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema(
     {
         username: {type: String, required: true},
+        name: {type: String},
+        about: {type: String},
         email: {type: String, required: true},
         validIds : [{type: String }],
         encryptedPassword: {type: String, required: true},
+        friends: [{ type : mongoose.Schema.Types.ObjectId, ref: 'User' }],
     });
 
 

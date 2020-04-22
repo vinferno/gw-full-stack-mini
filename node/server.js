@@ -5,10 +5,10 @@ require('dotenv').config();
 const path = require('path');
 const mongoose = require('mongoose');
 const db_uri = `mongodb://${process.env.DBUSER}:${process.env.DBPASS}@ds157853.mlab.com:57853/geekwise-social-club`;
-mongoose.connect(db_uri, { useNewUrlParser: true });
+mongoose.connect(db_uri, {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
+db.once('open', function () {
     console.log('Connected to database was successful! Start the server....');
     app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 });
@@ -21,7 +21,7 @@ const User = require('./modules/user.schema');
 app.use('/js', express.static(path.join(__dirname + '/../js')));
 app.use('/css', express.static(path.join(__dirname + '/../css')));
 
-app.use( (req, res, next) => {
+app.use((req, res, next) => {
     console.log(req.method, req.originalUrl);
     next();
 })
@@ -29,20 +29,22 @@ app.use( (req, res, next) => {
 app.get('/', (req, res) => res.sendFile(path.join(__dirname + '/../html/login-page.html')));
 app.get('/profile', (req, res) => res.sendFile(path.join(__dirname + '/../html/profile.html')));
 app.get('/edit-profile', (req, res) => res.sendFile(path.join(__dirname + '/../html/edit-profile.html')));
+app.get('/users', (req, res) => res.sendFile(path.join(__dirname + '/../html/users-page.html')));
 app.post('/api-sign-up', (req, res) => {
 
     const userInfo = {
         username: req.body.username,
         email: req.body.email,
         validIds: [req.body.username, req.body.email],
+        friends: [],
     }
     const user = new User(userInfo);
     user.encryptedPassword = user.generateHash(req.body.password);
     console.log('api-sign', req.body);
     user.save(function (errorSave) {
         User.find({
-            'validIds': { $in: [req.body.username, req.body.email] }
-        }).then( (users) => {
+            'validIds': {$in: [req.body.username, req.body.email]}
+        }).then((users) => {
 
 
             if (users) {
@@ -52,12 +54,12 @@ app.post('/api-sign-up', (req, res) => {
                     if (String(indexedUser._id) !== String(user._id)) {
                         if (user.email === indexedUser.email) {
                             const inUseEmail = ' Email is in use.';
-                            if(!message.includes(inUseEmail))
-                            message += inUseEmail;
+                            if (!message.includes(inUseEmail))
+                                message += inUseEmail;
                         }
                         if (user.username === indexedUser.username) {
                             const inUseUsername = ' Username is in use.';
-                            if(!message.includes(inUseUsername))
+                            if (!message.includes(inUseUsername))
                                 message += inUseUsername;
                         }
                     } else {
@@ -78,12 +80,12 @@ app.post('/api-sign-up', (req, res) => {
                     user,
                 });
             } else {
-                return res.json( {
+                return res.json({
                     message: 'no users',
                     users,
                 });
             }
-        }).catch( errorFind => {
+        }).catch(errorFind => {
             if (errorFind) {
                 console.log(errorFind);
                 return res.json({
@@ -103,8 +105,8 @@ app.post('/api-login', (req, res) => {
 
 
     User.find({
-        'validIds': { $in: [req.body.username, req.body.email] }
-    }).then( users => {
+        'validIds': {$in: [req.body.username, req.body.email]}
+    }).then(users => {
         if (!users || !users.length) {
             return res.json({
                 message: "User not found.",
@@ -135,8 +137,8 @@ app.post('/api-login', (req, res) => {
 app.post('/api-get-profile', (req, res) => {
     console.log('validId', req.body)
     User.find({
-        'validIds': { $in: [req.body.validId] }
-    }, ['email', 'username', '-_id']).then( users => {
+        'validIds': {$in: [req.body.validId]}
+    }, ['email', 'name', 'about', 'username', '-_id']).then(users => {
         if (!users || !users.length) {
             return res.json({
                 message: "User not found.",
@@ -151,4 +153,109 @@ app.post('/api-get-profile', (req, res) => {
     })
 
 
+});
+
+app.post('/api-edit-profile-submit', (req, res) => {
+    console.log('req.body');
+    console.log(req.body);
+    console.log(res);
+    User.findOneAndUpdate({
+        'validIds': {$in: [req.body.username, req.body.email]}
+    }, req.body, {
+        returnNewDocument: true,
+        new: true,
+    })
+        .then(result => {
+            console.log(result);
+            res.status(201).json({
+                user: result,
+                message: "found user.",
+                success: true,
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err,
+                message: "Error",
+                success: false,
+            });
+        })
+
+
+});
+
+app.get('/api-get-users', (req, res) => {
+    console.log('req.body');
+    console.log(req.body);
+    console.log(res);
+    User.find({}).then(result => {
+        console.log(result);
+        res.status(201).json({
+            users: result,
+            message: "found users.",
+            success: true,
+        });
+    })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err,
+                message: "Error",
+                success: false,
+            });
+        });
+});
+
+
+app.post('/api-add-friend', (req, res) => {
+    console.log('req.body');
+    console.log(req.body);
+    User.find({
+        'validIds': {$in: [req.body.myValidId]}
+    }).then(users => {
+        if (!users || !users.length) {
+            return res.json({
+                message: "User not found.",
+                success: false,
+            });
+        }
+        User.find({
+            'validIds': {$in: [req.body.friendValidId]}
+        }).then(friends => {
+            if (!friends || !friends.length) {
+                return res.json({
+                    message: "Friend not found.",
+                    success: false,
+                });
+            }
+            users[0].friends.push(friends[0]._id)
+            users[0].save();
+            return res.json({
+                message: "added friend",
+                success: true,
+                friend: friends[0],
+            });
+        });
+    });
+});
+
+app.post('/api-get-friends', (req, res) => {
+    console.log('req.body');
+    console.log(req.body);
+    User.find({
+        'validIds': {$in: [req.body.validId]}
+    }).populate('friends').then(users => {
+        if (!users || !users.length) {
+            return res.json({
+                message: "User not found.",
+                success: false,
+            });
+        }
+        return res.json({
+            message: "Friends found",
+            success: true,
+            users: users[0].friends,
+        });
+    });
 });

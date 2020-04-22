@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log('response', response);
                 if (response.success) {
                     window.location.href = window.location.origin + '/profile?validId=' + response.user.username;
+                    window.localStorage.setItem('myUser', JSON.stringify(response.user));
                 } else if(response.message) {
                     alert(response.message);
                 }
@@ -69,8 +70,10 @@ document.addEventListener('DOMContentLoaded', function () {
         })
             .then( res => res.json())
             .then(response => {
+                console.log('res', response);
                 if (response.success) {
                     window.location.href = window.location.origin + '/profile?validId=' + response.user.username;
+                    window.localStorage.setItem('myUser', JSON.stringify(response.user));
                 } else if(response.message) {
                     alert(response.message);
                 }

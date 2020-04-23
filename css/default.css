@@ -6,6 +6,7 @@
     --my-white: antiquewhite;
     --my-grey: linear-gradient(90deg, rgba(164,151,142,1) 0%, rgba(82,91,86,1) 49%, rgba(164,151,142,1) 100%);
     --my-profile-background: var(--my-grey);
+    --my-high-light: chartreuse;
 }
 
 .red {
@@ -32,7 +33,7 @@ main {
 }
 
 section {
-    height: 100vh;
+    min-height: 100vh;
     background-size: cover;
 }
 section.banner {
@@ -126,17 +127,19 @@ h1, h2, p {
     padding-right: 10vw;
 }
 .profile-background {
-    width: 50%;
+
+    flex: 1;
     background-image: linear-gradient(to left, rgba(164,151,142,.7) 0%, rgba(82,91,86,.8) 90%, rgba(40,45,43,.7) 95%);
     padding: 10px;
     border-bottom-left-radius: 10%;
     border-top-left-radius: 10%;
 }
 .profile-background-right {
-    width: 50%;
+    flex: 1;
+
     background-image: linear-gradient(to right, rgba(164,151,142,.7) 0%, rgba(82,91,86,.8) 90%, rgba(40,45,43,.7) 95%);
-    border-bottom-right-radius: 50%;
-    border-top-right-radius: 50%;
+    border-bottom-right-radius: 10vw;
+    border-top-right-radius: 10vw;
     padding: 15px;
     display: flex;
     align-items: center;
@@ -149,6 +152,10 @@ h1, h2, p {
     display: flex;
     flex-direction: column;
 }
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
 .text-align-left {
     text-align: left;
 }
@@ -159,6 +166,7 @@ h1, h2, p {
     width: auto;
     height: auto;
     border-radius: 50%;
+    margin-left: auto;
 }
 .profile-background a{
     display: inline-block;
@@ -215,17 +223,16 @@ h1, h2, p {
 
 
 .high-light {
-    color: chartreuse;
+    color: var(--my-high-light);
     text-transform: capitalize;
 }
 
 .my-chat {
-    color: chartreuse;
-    text-align: left;
+    color: var(--my-high-light);
 }
 
 .your-chat {
-    text-align: right;
+    text-align: center;
     color: var(--my-white);
     margin-left: auto;
 }
@@ -253,4 +260,85 @@ nav .disabled.disabled.disabled.disabled a {
 .chat-bubble {
     width: 50%;
     border: 1px solid white;
+    border-radius: 10px;
+}
+
+.chat-page #chat-ul {
+    margin-top:0;
+}
+.chat-page #username {
+    margin-bottom: 0;
+}
+
+.my-name {
+    color: var(--my-high-light);
+}
+.your-name {
+    color: var(--my-white);
+}
+
+.logout {
+    background-color: var(--my-white);
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.nav ul {
+    list-style: none;
+    background-color: #444;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+.nav li {
+    font-family: 'Oswald', sans-serif;
+    font-size: .8em;
+    height: 40px;
+    border-bottom: 1px solid #888;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    transition: .3s background-color;
+}
+
+.nav a:hover {
+    background-color: #005f5f;
+}
+
+.nav a.active {
+    background-color: #fff;
+    color: #444;
+    cursor: default;
+}
+
+@media screen and (min-width: 600px) {
+    .nav li {
+        width: 120px;
+        border-bottom: none;
+        height: 50px;
+        font-size: .8em;
+    }
+
+    /* Option 1 - Display Inline */
+    .nav li {
+        display: inline-block;
+        margin-right: -4px;
+    }
+
+    /* Options 2 - Float
+    .nav li {
+      float: left;
+    }
+    .nav ul {
+      overflow: auto;
+      width: 600px;
+      margin: 0 auto;
+    }
+    .nav {
+      background-color: #444;
+    }
+    */
 }

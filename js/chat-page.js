@@ -20,7 +20,7 @@ function getConversation() {
     const myValidId = urlParams.get('myValidId');
     const title = document.querySelector('h3');
     title.style.textTransform = 'capitalize';
-    title.innerHTML = `<span class="high-light">${myValidId}</span> : ${validId}`;
+    title.innerHTML = `<span class="my-name">${myValidId}</span> : <span class="your-name">${validId}</span> `;
     fetch('api-get-conversation', {
         method: 'POST',
         headers: {
@@ -43,7 +43,7 @@ function getConversation() {
                 const chatLi = document.createElement('li');
                 const chatBubble = document.createElement('div');
                 chatBubble.classList.add('chat-bubble');
-                chatBubble.innerHTML = `<span class="chat-name">${chat.sender.username}-</span> ${chat.message}`;
+                chatBubble.innerHTML = `${chat.message}`;
                 chatLi.appendChild(chatBubble);
                 chatUl.prepend(chatLi);
                 if (chat.sender.username === myValidId) {

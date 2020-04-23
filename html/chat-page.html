@@ -7,21 +7,33 @@
     <script src="../js/chat-page.js"></script>
 </head>
 <body>
+<header>
+    <div class="nav">
+        <ul>
+            <li class="home"><a href="#">Home</a></li>
+            <li class="tutorials"><a class="active" href="#">Tutorials</a></li>
+            <li class="about"><a href="#">About</a></li>
+            <li class="news"><a href="#">Newsletter</a></li>
+            <li class="contact"><a href="#">Contact</a></li>
+        </ul>
+    </div>
+</header>
 <section id="chat-page" class="chat-page">
     <div >
 
-        <div>
 
-            <ul>
-                <li><a href="/users" class="block">All Users</a></li>
-            </ul>
-
+        <div class="title">
+            <a href="/users" class="block">All Users</a>
+            <h1>
+                Chat
+            </h1>
+            <hr>
         </div>
         <div class="flex-horizontal child-no-margin">
             <input id="chat-input" type="text" class="full-width"><button id="chat-submit">Submit</button>
         </div>
 
-        <h3 id="username">Username</h3>
+            <h3 id="username">Username</h3>
             <ul id="chat-ul">
                 <li>Loading...</li>
             </ul>
@@ -32,10 +44,9 @@
 </section>
 <footer>
     <div>
-        <p>Posted by: Vinson Fernandez</p>
+        <a class="logout" href="/">Logout</a>
         <p>Contact information: <a href="mailto:vinsonfernandez@gmail.com">
             vinsonfernandez@gmail.com</a>.</p>
-        <a href="/">Logout</a>
     </div>
 </footer>
 </body>

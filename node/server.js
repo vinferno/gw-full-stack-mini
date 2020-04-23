@@ -4,7 +4,7 @@ const port = 3000;
 require('dotenv').config();
 const path = require('path');
 const mongoose = require('mongoose');
-const db_uri = `mongodb://${process.env.DBUSER}:${process.env.DBPASS}@ds157853.mlab.com:57853/geekwise-social-club`;
+const db_uri = `mongodb://${process.env.DBUSER}:${process.env.DBPASS}@${process.env.DBNAME}`;
 mongoose.connect(db_uri, {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
